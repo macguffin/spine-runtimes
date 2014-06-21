@@ -1220,6 +1220,8 @@ spine.AnimationState.prototype = {
 				// End non-looping animation when it reaches its end time and there is no next entry.
 				if (!current.loop && current.lastTime >= current.endTime) this.clearTrack(i);
 			}
+			this.frameHead = current.lastTime % current.endTime;
+        		this.totalTime = current.time;
 		}
 	},
 	apply: function (skeleton) {
@@ -1266,8 +1268,6 @@ spine.AnimationState.prototype = {
 				if (current.onComplete) current.onComplete(i, count);
 				if (this.onComplete) this.onComplete(i, count);
 			}
- 			this.frameHead = lastTime % endTime
-            		this.totalTime = current.time;
 			current.lastTime = current.time;
 		}
 	},

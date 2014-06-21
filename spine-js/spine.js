@@ -1202,7 +1202,9 @@ spine.AnimationState.prototype = {
 			if (!fixed) {
                 		current.time += delta * current.timeScale;
             			} else {
-                		current.time = delta;
+                		 current.time = delta;
+                                 frameHead = current.time;
+        			 totalTime = current.time;
             			}
 			if (current.previous) {
 				var previousDelta = delta * current.previous.timeScale;

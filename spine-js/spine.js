@@ -1188,13 +1188,22 @@ spine.AnimationState.prototype = {
 	onComplete: null,
 	onEvent: null,
 	timeScale: 1,
-	update: function (delta) {
+        frameHead: 0,
+        totalTime: 0,
+	update: function (delta, fixed) {
+		if (fixed === undefined) {
+        		 fixed = false;
+        		}
 		delta *= this.timeScale;
 		for (var i = 0; i < this.tracks.length; i++) {
 			var current = this.tracks[i];
 			if (!current) continue;
 
-			current.time += delta * current.timeScale;
+			if (!fixed) {
+                		current.time += delta * current.timeScale;
+            			} else {
+                		current.time = delta;
+            			}
 			if (current.previous) {
 				var previousDelta = delta * current.previous.timeScale;
 				current.previous.time += previousDelta;
@@ -1255,7 +1264,8 @@ spine.AnimationState.prototype = {
 				if (current.onComplete) current.onComplete(i, count);
 				if (this.onComplete) this.onComplete(i, count);
 			}
-
+ 			this.frameHead = lastTime % endTime
+            		this.totalTime = current.time;
 			current.lastTime = current.time;
 		}
 	},

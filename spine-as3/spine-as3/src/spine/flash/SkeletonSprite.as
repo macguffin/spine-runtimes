@@ -95,18 +95,17 @@ public class SkeletonSprite extends Sprite {
 
 					// Rotate and scale using default registration point (top left corner, y-down, CW) instead of image center.
 					bitmap.rotation = -regionAttachment.rotation;
-					bitmap.scaleX = regionAttachment.scaleX * (regionAttachment.width / region.width);
-					bitmap.scaleY = regionAttachment.scaleY * (regionAttachment.height / region.height);
-
+					bitmap.scaleX = regionAttachment.scaleX;
+					itmap.scaleY = regionAttachment.scaleY;
 					// Position using attachment translation, shifted as if scale and rotation were at image center.
 					var radians:Number = -regionAttachment.rotation * Math.PI / 180;
 					var cos:Number = Math.cos(radians);
 					var sin:Number = Math.sin(radians);
-					var shiftX:Number = -regionAttachment.width / 2 * regionAttachment.scaleX;
-					var shiftY:Number = -regionAttachment.height / 2 * regionAttachment.scaleY;
+					var shiftX:Number = -region.width / 2 * regionAttachment.scaleX;
+					var shiftY:Number = -region.height / 2 * regionAttachment.scaleY;
 					if (region.rotate) {
 						bitmap.rotation += 90;
-						shiftX += regionHeight * (regionAttachment.width / region.width);
+						shiftX += regionHeight * (region.width / region.width);
 					}
 					bitmap.x = regionAttachment.x + shiftX * cos - shiftY * sin;
 					bitmap.y = -regionAttachment.y + shiftX * sin + shiftY * cos;

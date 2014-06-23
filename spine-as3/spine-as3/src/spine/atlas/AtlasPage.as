@@ -32,8 +32,7 @@ package spine.atlas {
 
 public class AtlasPage {
 	public var name:String;
-        public var size:Format;
-	public var format:Format;
+      	public var format:Format;
 	public var minFilter:TextureFilter;
 	public var magFilter:TextureFilter;
 	public var uWrap:TextureWrap;
